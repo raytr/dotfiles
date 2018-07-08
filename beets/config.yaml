@@ -1,0 +1,5 @@
+directory: /home/raytr/Music
+library: /home/raytr/Music/library.blb
+plugins: fetchart missing embedart duplicates
+fetchart:
+    maxwidth: 500
