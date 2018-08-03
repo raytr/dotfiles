@@ -17,7 +17,9 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'chrisbra/Colorizer'
 Plugin 'vimwiki/vimwiki'
-
+Plugin 'vim-scripts/TeTrIs.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'vim-jp/vim-cpp'
 call vundle#end()            " required
 
 
@@ -56,9 +58,16 @@ set undodir     =$HOME/.vim/files/undo/
 " set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/files/info/.viminfo
 " === BINDINGS ===
-
-
-
+noremap! <C-BS> <C-w>
+noremap! <C-h> <C-w>
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
+noremap  <buffer> <silent> 0 g0
+noremap  <buffer> <silent> $ g$
+onoremap <silent> j gj
+onoremap <silent> k gk
+nnoremap <S-j> 7gj
+nnoremap <S-k> 7gk
 
 
 
@@ -68,12 +77,17 @@ set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/files/info/.viminfo
 
 
 " === ETC ===
+" disable esc delay
+set timeoutlen=1000 ttimeoutlen=0 
+set tabstop=4
 " make clipboard work in other programs
 set clipboard=unnamedplus
 " backspace
 set backspace=indent,eol,start
 " indent based on previous
-set autoindent
+"set autoindent
+"set smartindent
+"set cindent
 " line numbers & relative linee numbers
 set number
 set relativenumber
