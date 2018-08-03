@@ -8,7 +8,8 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
+# disable the stupid mouse focus:
+focus_follows_mouse no
 set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -136,7 +137,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
+bindsym $mod+m exec /home/raytr/scripts/custom/toggleMousePad
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -165,6 +166,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec --no-startup-id nm-applet
+exec --no-startup-id pasystray
+exec unclutter
 exec xbindkeys
 set $bg-color 	         #303030
 set $inactive-bg-color   #303030
@@ -193,7 +196,7 @@ bar {
 	}
 }
 bindsym $mod+d exec rofi -show run -columns 1 
-
+exec --no-startup-id blueman-applet 
 exec --no-startup-id compton -f
 # volume
 #bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+; exec pkill -RTMIN+10 i3blocks 
@@ -203,12 +206,13 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
 bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
 bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
 #gpick Colorpicker
-
+for_window [class="(?i)keepassxc"] move container to workspace 9
+exec --no-startup-id keepassxc
 for_window [class="Firefox"] move container to workspace 1
 exec --no-startup-id firefox
 
 
-bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
-bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print --release exec "maim -s | xclip -selection clipboard -t image/png"
+bindsym Print --release exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 
