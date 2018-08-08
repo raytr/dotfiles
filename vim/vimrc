@@ -20,6 +20,20 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'vim-scripts/TeTrIs.vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'vim-jp/vim-cpp'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 call vundle#end()            " required
 
 
@@ -79,7 +93,19 @@ nnoremap <S-k> 7gk
 " === ETC ===
 " disable esc delay
 set timeoutlen=1000 ttimeoutlen=0 
+" set tabstop=4
+" size of a hard tabstop
 set tabstop=4
+
+" always uses spaces instead of tab characters
+set expandtab
+
+" size of an "indent"
+set shiftwidth=4
+
+
+
+
 " make clipboard work in other programs
 set clipboard=unnamedplus
 " backspace
