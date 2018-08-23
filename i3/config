@@ -195,8 +195,9 @@ bar {
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 	}
 }
-bindsym $mod+d exec rofi -show run -columns 1 
-exec --no-startup-id blueman-applet 
+bindsym $mod+d exec rofi -terminal st -show drun  -columns 1 
+#bindsym $mod+d exec rofi -combi-mode window,drun -show combi -modi combi  -columns 1  -terminal st 
+#exec --no-startup-id blueman-applet 
 exec --no-startup-id compton -f
 # volume
 #bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+; exec pkill -RTMIN+10 i3blocks 

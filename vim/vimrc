@@ -3,9 +3,6 @@ syntax on
 filetype plugin indent on
 
 
-
-
-
 " === PLUGINS ===
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -13,13 +10,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+"Appearance 
 Plugin 'itchyny/lightline.vim'
 Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'chrisbra/Colorizer'
+Plugin 'ap/vim-buftabline'
+"Extras
 Plugin 'vimwiki/vimwiki'
 Plugin 'vim-scripts/TeTrIs.vim'
+"Syntax/code stuff
 Plugin 'sheerun/vim-polyglot'
 Plugin 'vim-jp/vim-cpp'
+Plugin 'junegunn/goyo.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -71,18 +73,26 @@ set undodir     =$HOME/.vim/files/undo/
 " viminfo files
 " set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/files/info/.viminfo
+
+
 " === BINDINGS ===
+"Make ctrl backspace work as it does in other programs
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
+"Make j/k movement work normally across lines
 noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 onoremap <silent> j gj
 onoremap <silent> k gk
+"Jump 7 lines 
 nnoremap <S-j> 7gj
 nnoremap <S-k> 7gk
-
+"buffers
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprev<CR>
+nnoremap <C-p> :b#<CR>
 
 
 
@@ -91,6 +101,11 @@ nnoremap <S-k> 7gk
 
 
 " === ETC ===
+" Highlight current line
+set cursorline
+" Java stuff
+autocmd Filetype java set makeprg=javac\ %
+set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 " disable esc delay
 set timeoutlen=1000 ttimeoutlen=0 
 " set tabstop=4
@@ -103,8 +118,10 @@ set expandtab
 " size of an "indent"
 set shiftwidth=4
 
+set incsearch
 
-
+"always enable hidden buffers
+set hidden
 
 " make clipboard work in other programs
 set clipboard=unnamedplus
