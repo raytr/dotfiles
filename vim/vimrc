@@ -2,40 +2,50 @@ set nocompatible
 syntax on
 filetype plugin indent on
 
-
-" === PLUGINS ===
+" === PLUGIN MANAGER ===
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"Appearance 
+" === PLUGINS ===
+" ** Appearance 
 Plugin 'itchyny/lightline.vim'
 Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'chrisbra/Colorizer'
-Plugin 'ap/vim-buftabline'
-"Extras
+Plugin 'bling/vim-bufferline'
+" ** Extras
 Plugin 'vimwiki/vimwiki'
 Plugin 'vim-scripts/TeTrIs.vim'
-"Syntax/code stuff
+" ** NERDTree
+Plugin 'scrooloose/nerdtree'
+" ** Fuzzy file finder
+" USE FZF
+set rtp+=~/.fzf
+Plugin 'junegunn/fzf.vim'
+" ** Syntax/code stuff
+
 Plugin 'sheerun/vim-polyglot'
+"Fixing a bug in vim-polylgot
+let g:polyglot_disabled = ['graphql']
+
 Plugin 'vim-jp/vim-cpp'
 Plugin 'junegunn/goyo.vim'
 
+" ** Ultisnips
 " Track the engine.
 Plugin 'SirVer/ultisnips'
-
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+
+" * END plugins
 call vundle#end()            " required
 
 
@@ -75,6 +85,16 @@ set undodir     =$HOME/.vim/files/undo/
 set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/files/info/.viminfo
 
 
+
+"let mapleader = "\<Space>"
+map <Space> <Leader>
+" === PLUGIN BINDS === 
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>o :Buffers<cr>
+nnoremap <leader>l :Lines<cr>
+nnoremap <leader>m :Marks<cr>
+
 " === BINDINGS ===
 "Make ctrl backspace work as it does in other programs
 noremap! <C-BS> <C-w>
@@ -90,10 +110,25 @@ onoremap <silent> k gk
 nnoremap <S-j> 7gj
 nnoremap <S-k> 7gk
 "buffers
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprev<CR>
-nnoremap <C-p> :b#<CR>
+nnoremap <C-L> :bnext<CR>
+nnoremap <C-H> :bprev<CR>
+nnoremap <leader>p :b#<CR>
+nnoremap <leader>bd :bd
+nnoremap <leader>bbd :bufdo bd
+"windows
+nnoremap <leader>j <C-W><C-J>
+nnoremap <leader>k <C-W><C-K>
+nnoremap <leader>l <C-W><C-L>
+nnoremap <leader>h <C-W><C-H>
 
+nnoremap <leader>c :split<CR>
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>w <C-w>
+nnoremap <leader>- <C-w>-
+nnoremap <leader>+ <C-w>=
+nnoremap <leader>, <C-w><
+nnoremap <leader>. <C-w>>
+nnoremap <leader>= <C-w>+
 
 
 
@@ -101,6 +136,8 @@ nnoremap <C-p> :b#<CR>
 
 
 " === ETC ===
+" Show commands
+set showcmd
 " Highlight current line
 set cursorline
 " Java stuff
@@ -111,18 +148,16 @@ set timeoutlen=1000 ttimeoutlen=0
 " set tabstop=4
 " size of a hard tabstop
 set tabstop=4
-
 " always uses spaces instead of tab characters
 set expandtab
-
 " size of an "indent"
 set shiftwidth=4
-
 set incsearch
-
+"Smart case searching
+set ignorecase
+set smartcase
 "always enable hidden buffers
 set hidden
-
 " make clipboard work in other programs
 set clipboard=unnamedplus
 " backspace
