@@ -15,19 +15,26 @@ Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'chrisbra/Colorizer'
 Plugin 'bling/vim-bufferline'
 " ** Extras
+"LaTeX
+Plugin 'lervag/vimtex'
+Plugin '907th/vim-auto-save'
+" Plugin 'xuhdev/vim-latex-live-preview'
+" let g:livepreview_previewer = 'zathura'
 Plugin 'vimwiki/vimwiki'
-Plugin 'vim-scripts/TeTrIs.vim'
 " ** NERDTree
 Plugin 'scrooloose/nerdtree'
+" ** Auto close bracket on enter
+Plugin 'rstacruz/vim-closer'
 " ** Fuzzy file finder
 " USE FZF
 set rtp+=~/.fzf
 Plugin 'junegunn/fzf.vim'
-" ** Syntax/code stuff
 
+" ** Syntax/code stuff
 Plugin 'sheerun/vim-polyglot'
 "Fixing a bug in vim-polylgot
 let g:polyglot_disabled = ['graphql']
+let g:polyglot_disabled = ['latex']
 
 Plugin 'vim-jp/vim-cpp'
 Plugin 'junegunn/goyo.vim'
@@ -88,11 +95,28 @@ set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/files/info/.viminfo
 
 "let mapleader = "\<Space>"
 map <Space> <Leader>
-" === PLUGIN BINDS === 
+" === PLUGIN BINDS/SETTINGS === 
+" Auto save for .tex files (for live previewing with vimtex)
+autocmd FileType tex :AutoSaveToggle
+function! s:goyo_enter()
+  set noshowmode
+  set noshowcmd
+  set wrap
+  set linebreak
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  set showmode
+  set showcmd
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>f :Files<cr>
+nnoremap <leader>O :Files<cr>
 nnoremap <leader>o :Buffers<cr>
-nnoremap <leader>l :Lines<cr>
+nnoremap <leader>f :Lines<cr>
 nnoremap <leader>m :Marks<cr>
 
 " === BINDINGS ===
@@ -136,6 +160,15 @@ nnoremap <leader>= <C-w>+
 
 
 " === ETC ===
+" Folding
+set foldmethod=syntax   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+" Faster updates
+set updatetime=1000
+" disable showing @ for long lines
+set display+=lastline 
 " Show commands
 set showcmd
 " Highlight current line
